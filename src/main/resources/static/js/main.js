@@ -5,8 +5,11 @@ $(function () {
     $('.books').append(code);
   }
 
-  $.get('GET', function (result) {
-    addBook(result);
+  $.get('/books/', function (result) {
+    for(i in result){
+       addBook(result[i]);
+    }
+   
   })
   //сохранить на сервере
   $('.save').click(function () {
@@ -16,9 +19,9 @@ $(function () {
       url: '/books/',
       data: data,
       success: function (result) {
-       for(i in result) {
-        addBook(result[i]);
-       }
+      //  for(i in result) {
+      //   addBook(result[i]);
+      //  }
       },
       error: function (jqXHR, textStatus, errorThrown) {
         alert("Error: " + errorThrown);
