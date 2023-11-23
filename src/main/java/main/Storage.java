@@ -20,4 +20,8 @@ public class Storage {
         books.put(id, book);
         return id;
     }
+    public static Book getBook(int id){
+        Book book = books.get(id);
+        return book;
+    }
 }
