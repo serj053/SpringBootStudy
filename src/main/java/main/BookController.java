@@ -4,6 +4,7 @@ import main.model.Book;
 import main.model.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,8 @@ public class BookController {
     public List<Book> gatAllBook(){
         return Storage.getAllBook();
     }
-    public Book getBook(){
-        return null;
+    @GetMapping("/books/{id}")
+    public Book getBook(@PathVariable int id){
+        return Storage.getBook(id);
     }
 }
