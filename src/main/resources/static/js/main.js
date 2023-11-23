@@ -12,11 +12,10 @@ $(function () {
   });
 
   $(document).on('click','.get-book',function () {
-    alert("In get-book");
     var link = $(this);
     var id = link.data('id');
     $.get('/books/' + id, function (result) {
-      $(this).after('<div>' + result.year + '</div>');
+      link.after('<div> '+ result.year +' </div><hr>');
     })
   });
 
