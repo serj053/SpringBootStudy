@@ -3,13 +3,13 @@ package main;
 import main.model.Book;
 import main.model.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
@@ -38,7 +38,21 @@ public class BookController {
     }
 
     @GetMapping("/books/{id}")
-    public Book getBook(@PathVariable int id) {
-        return Storage.getBook(id);
+    public ResponseEntity getBook(@PathVariable int id) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if(!bookOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return new ResponseEntity(bookOptional.get(), HttpStatus.OK);
+       // return Storage.getBook(id);
+    }
+@DeleteMapping("/books/{id}")
+    public Boolean delete(@PathVariable int id){
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if(optionalBook.isPresent()){
+            bookRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
