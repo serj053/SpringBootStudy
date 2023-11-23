@@ -20,4 +20,7 @@ public class BookController {
     public List<Book> gatAllBook(){
         return Storage.getAllBook();
     }
+    public Book getBook(){
+        return null;
+    }
 }

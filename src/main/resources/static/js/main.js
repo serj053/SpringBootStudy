@@ -27,6 +27,7 @@ $(function () {
         alert("Error: " + errorThrown);
       }
     })
-  })
+    //return false; // если добавить то страница не будет пергружаться после функции ajax
+  });
 
 });
